@@ -24,7 +24,11 @@ public:
     
 public:    
     int getNbBlocMAx(vector<Bloc> b);
-    vector <UTXO> getUTXO(Bloc b) ;
+    vector <UTXO> getAllUTXO(Bloc b) ;
+    vector <TXI>  getAllTXI(Bloc b);
+    vector<Bloc> updateBlocs();
+    vector<TXI> compare();
+    
     float getMontant(unsigned char publicKey[]);
     TX createTransaction(unsigned char E_PrKey[], unsigned char E_PbKey[], unsigned char D_PbKey[], float montant);
     
