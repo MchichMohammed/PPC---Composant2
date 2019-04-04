@@ -35,17 +35,60 @@ int Wallet::getNbBlocMAx(vector<Bloc> blocs)
 	return num;
 }
 
-vector <UTXO>  Wallet::getUTXO(Bloc b) {
+vector <UTXO>  Wallet::getAllUTXO(Bloc b) {
     
         vector <UTXO> list;
 
         for(UTXO u: b.tx1.UTXOs ) list.push_back(u);
 
         return list;
+}
+
+vector <TXI>  Wallet::getAllTXI(Bloc b) {
+    
+        vector <TXI> list;
+
+        for(TXI u: b.tx1.TXIs ) list.push_back(u);
+
+        return list;
     
 }
 
+vector<Bloc> Wallet::updateBlocs(vector<Bloc> list) // Dans chaque bloc on met le num et hash du bloc d'avant
+{
+	Bloc a;
+	int cpt=0;
+	for (Bloc b : list)
+	{
+		if (cpt>0)
+		{
+			b.nonce=a.num;
+			b.previous_hash=a.hash;
+			cpt++;
+		}
+		a=b;
+	}	
+		
+	return list ;
+}
 
+
+vector<TXI> Wallet::compare() // Comparaison UTXO et TXI
+	vector <TXI> TXIs = getAllTXI();
+	vector <UTXO> UTXOs= getAllUTXO();
+	vector <TXI> list_TXI_utilise;
+	for (TXI t : TXIs)
+	{
+		if (UTXOs.contains(t)) 
+		{
+			list_TXI_utilise.push_back(t);
+		}
+		
+		
+	}	
+		
+	return list_TXI_utilise ;
+}
 
 float Wallet::getMontant(unsigned char publicKey[]) {
     
@@ -55,7 +98,7 @@ float Wallet::getMontant(unsigned char publicKey[]) {
         float sum = 0;
         for (Bloc b : blocs) {
             
-                vector <UTXO> list= getUTXO(b);
+                vector <UTXO> list= getAllUTXO(b);
                 for( UTXO u : list) {
                     
                     if(u.dest == publicKey) {
@@ -112,5 +155,3 @@ void pub_copy(unsigned char txt[],unsigned char D_PbKey[]) {
         i++;
     }
 }
-
-
