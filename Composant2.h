@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-/* 
+/*
  * File:   Composant2.h
  *
  * Created on 18 mars 2019, 17:40
@@ -20,24 +20,27 @@ using namespace std;
 class Wallet {
 public:
     unsigned  char cle_public[KEY_SIZE];
-    unsigned char cle_prive[KEY_SIZE];  
+    unsigned char cle_prive[KEY_SIZE];
     
-public:    
+public:
     int getNbBlocMAx(vector<Bloc> b);
-    vector <UTXO> getUTXO(Bloc b) ;
+    vector <UTXO> getAllUTXO(Bloc b) ;
+    vector <TXI>  getAllTXI(Bloc b);
+    vector<Bloc> updateBlocs();
+    vector<TXI> compare();
+    
     float getMontant(unsigned char publicKey[]);
     TX createTransaction(unsigned char E_PrKey[], unsigned char E_PbKey[], unsigned char D_PbKey[], float montant);
     
     
     
-//    vector<Bloc> blocs; 
+    //    vector<Bloc> blocs;
     
-//    Wallet();
-
+    //    Wallet();
+    
 };
 
 void pub_copy(unsigned char txt[],unsigned char D_PbKey[]);
 void stringToUnsignedChar64(string s, unsigned char*& uc);
 
 #endif
-
