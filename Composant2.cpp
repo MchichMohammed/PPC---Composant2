@@ -54,8 +54,9 @@ vector <TXI>  Wallet::getAllTXI(Bloc b) {
     
 }
 
-vector<Bloc> Wallet::updateBlocs(vector<Bloc> list) // Dans chaque bloc on met le num et hash du bloc d'avant
+vector<Bloc> Wallet::updateBlocs() // Dans chaque bloc on met le num et hash du bloc d'avant
 {
+	vector<Bloc> list=getBlocs();
 	Bloc a;
 	int cpt=0;
 	for (Bloc b : list)
