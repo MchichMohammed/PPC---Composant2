@@ -52,6 +52,12 @@ int main(int argc, char** argv) {
     cout <<"Montant A "<< w1.getMontant(w1.cle_public) <<endl;
     cout <<"Montant B "<<w1.getMontant(w1.cle_public) <<endl;
     
+    UTXO** utxoss;
+	
+	
+	std::vector<Bloc> blocs = getBlocs();
+
+	utxoss = getAllUTXO(blocs);
     
 
 
